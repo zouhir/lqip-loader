@@ -28,7 +28,7 @@ I am Currently working on a solution to pipe it after *file-loader* or *url-load
 
 #### Example usage
 
-*Loading JPEG or JPG files*
+**Loading JPEG or JPG files**
 
 in your *webpack config file*
 
@@ -47,7 +47,7 @@ in your *webpack config file*
 }
 ```
 
-*In your module*
+**In your module**
 
 ```js
 import banner from './images/banner.jpg';
