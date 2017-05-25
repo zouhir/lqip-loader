@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://lqip-loader.firebaseapp.com/media/logo.png">
+  <img src="https://lqip-loader.firebaseapp.com/media/logo.png" width="200">
     <br />
     LQIP-LOADER for WEBPACK
     <br />
