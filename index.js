@@ -43,7 +43,7 @@ module.exports.pitch = function(content) {
   };
   // take the user's specified options as a preference
   Object.keys(config).forEach(function(key) {
-    config[key] = baseConfig[key];
+    config[key] = baseConfig[key] || config[key];
   });
   // loader context
   var context = config.context || this.options.context;
@@ -63,7 +63,7 @@ module.exports.pitch = function(content) {
   }
 
   sharp(path)
-    .resize(16) // resize to 16px width and auto height
+    .resize(14) // resize to 16px width and auto height
     .toBuffer() // converts to buffer for Base64 conversion
     .then(data => {
       presource = toBase64(extension, data);
