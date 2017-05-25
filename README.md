@@ -39,7 +39,8 @@ in your *webpack config file*
         {
             loader: 'lqip-loader',
             options: {
-                path: '/media'
+                path: '/media', // your image going to be in media folder in the output dir
+                name: '[name].[ext]' // you can use [hash].[ext] too if you wish
             }
         },
     ]
