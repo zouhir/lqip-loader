@@ -32,7 +32,7 @@ I am Currently working on a solution to pipe it after *file-loader* or *url-load
 
 in your *webpack config file*
 
-```json
+```js
 {
     test: /\.jpe?g$/,
     loaders: [
