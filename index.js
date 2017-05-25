@@ -4,7 +4,7 @@ var sharp = require('sharp');
 
 var loaderUtils = require('loader-utils');
 var lqipName = require('./package.json').name;
-var lqipVersion = require('./package.json').version;
+var packageversion = require('./package.json').version;
 
 // supported images \ mimetypes
 // best results have been seen on JPEG banners
@@ -59,16 +59,15 @@ module.exports.pitch = function(content) {
   var output = {};
 
   if (typeof SUPPORTED_MIMES[extension] === 'undefined') {
-    throw new Error('Unsupported image format passed to ' + name + ' v. ' + version);
+    throw new Error('Unsupported image format passed to ' + packageName + ' v. ' + packageversion);
   }
 
-  source = this.inputValue
   sharp(path)
     .resize(16) // resize to 16px width and auto height
     .toBuffer() // converts to buffer for Base64 conversion
     .then(data => {
       presource = toBase64(extension, data);
-      output.src = source || 'asdasd';
+      output.src = source;
       output.preSrc = presource;
       callback(null, 'module.exports = ' + JSON.stringify(output) + ';');
     })
