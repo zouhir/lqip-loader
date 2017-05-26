@@ -22,7 +22,7 @@
 
 #### What can be improved
 
-Image *src* hold a reference for the file path in your output directory, it does not emmit the file, but at the moment it lacks the smartness and capability of *file-loader* to maintain relative paths.
+Image *src* hold a reference for the file path in your output directory, it does not emit the file, but at the moment it lacks the smartness and capability of *file-loader* to maintain relative paths.
 
 I am Currently working on a solution to pipe it after *file-loader* or *url-loader* or find a better src URL implemenation please feel free to submit a PR or raise an issue with your idea.
 
