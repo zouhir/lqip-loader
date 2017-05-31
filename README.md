@@ -10,6 +10,8 @@
 
 #### [Demo: must see first](https://lqip-loader.firebaseapp.com/)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/zouhir/lqip-loader.svg)](https://greenkeeper.io/)
+
 #### Inspired By:
 - Medium web app
 - Instagram mobile app
