@@ -29,6 +29,7 @@
   "homepage": "https://github.com/zouhir/lqip-loader#readme",
   "dependencies": {
     "loader-utils": "^1.1.0",
+    "lqip": "^2.0.0",
     "sharp": "^0.17.3"
   }
 }
