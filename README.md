@@ -24,6 +24,8 @@ npm install --save-dev lqip-loader
 
 Generating Base64 & dominant colours palette for a jpeg image imported in your JS bundle:
 
+PS: The large image file will be emitted & only 400byte of Base64 (if set to true in the loader options) will be bundled.
+
 webpack.config.js:
 ```js
 {
@@ -77,7 +79,7 @@ If you want the blur to be smooth really bad, here's a fix!
 
 More history about the issue can be [found here](https://bugs.chromium.org/p/chromium/issues/detail?id=771110#c3) and [here](https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/6L_3ZZeuA0M).
 
-alternatively, you can fill the container with really cheap colour or gradient from the amazing palette we provide.
+alternatively, you can fill the container with a really cheap colour or gradient from the amazing palette we provide.
 
 <br />
 <p>
