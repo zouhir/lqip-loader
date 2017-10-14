@@ -45,7 +45,8 @@ your-app-module.js:
 ```js
 import banner from './images/banner.jpg';
 
-console.log(banner.preSrc) // "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhY....
+console.log(banner.preSrc);
+// outputs: "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhY.... 
 
 // the object will have palette property, array will be sorted from most dominant colour to least
 console.log(banner.palette) // [ '#628792', '#bed4d5', '#5d4340', '#ba454d', '#c5dce4', '#551f24' ]
@@ -61,7 +62,7 @@ console.log(banner.src) // that's the original image URL to load later!
 
 To save memory and improve GPU performance browsers (including Chrome started from 61.0.3163.38) will now  render a 
 slightly more crisp or pixelated Base64 images.
-<p>
+<p align="center">
   <img src="https://user-images.githubusercontent.com/5052316/31105257-7986782c-a82e-11e7-972b-cabcf97f13c0.png" width="500px" />
   <br />
   Older Chrome to the left, Chrome v61 to the right.
@@ -101,6 +102,6 @@ alternatively, you can fill the container with really cheap colour or gradient f
 
 Related projects to this would be [lqip-loader for webpack](https://github.com/zouhir/lqip-loader) as well as [lqip-cli](https://github.com/zouhir/lqip-cli).
 
-Thanks to [Colin van Eengie](https://twitter.com/cvaneenige) for his reviewing and early testing.
+Thanks to [Colin van Eenige](https://twitter.com/cvaneenige) for his reviewing and early testing.
 
 MIT - [Zouhir Chahoud](https://zouhir.org/)
