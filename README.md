@@ -8,8 +8,6 @@
 </p>
 
 <br />
-<img src="https://raw.githubusercontent.com/zouhir/lqip-loader/master/_github/bee.jpg" width="100%">
-
 <br />
 <p>
   <img src="https://raw.githubusercontent.com/zouhir/lqip/master/_github/installation.png" width="100%">
