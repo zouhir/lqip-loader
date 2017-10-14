@@ -1,21 +1,12 @@
-/**
- * LQIP-LOADER by: Zouhir C
- * Library powering this loader: https://github.com/zouhir/lqip
- *
- * Which relies on:
- * http://sharp.dimens.io/en/stable/performance/#results
- * https://github.com/akfish/node-vibrant
- *
- */
-
 var loaderUtils = require("loader-utils");
+// lqip: https://github.com/zouhir/lqip
 var lqip = require("lqip");
 
 module.exports = function() {};
-/**
- * @TODO: investigate pitching loader alternatives
- * recommended to work in sequence with file-loader or url-loader
- */
+
+// @TODO: investigate pitching loader alternatives
+// recommended to work in sequence with file-loader or url-loader
+
 module.exports.pitch = function(content) {
   this.cacheable && this.cacheable();
   var callback = this.async();
@@ -28,9 +19,6 @@ module.exports.pitch = function(content) {
     .pop()
     .toLowerCase();
 
-  // the source HQ image file
-  var source = null;
-
   // user options
   var baseConfig = loaderUtils.getOptions(this) || {};
 
@@ -41,10 +29,12 @@ module.exports.pitch = function(content) {
     base64: true, // default that users want base64
     palette: false // set to false for speed purposes
   };
+
   // take the user's specified options as a preference
   Object.keys(config).forEach(function(key) {
     config[key] = baseConfig[key] || config[key];
   });
+
   // loader context
   var context = config.context || this.options.context;
 
@@ -56,44 +46,35 @@ module.exports.pitch = function(content) {
       content: content
     }) || "/";
 
-  /**
-   * promise array in case users want both
-   * base64 & color palettes generated
-   * that means we have 2 promises to resolve
-   */
+  // promise array in case users want both
+  // base64 & color palettes generated
+  // that means we have 2 promises to resolve
   var outputPromises = [];
+
   // output object
   var output = {};
-  output.src = source;
+
+  output.src = source; // original image source
 
   if (config.base64 === true) {
     outputPromises.push(lqip.base64(path));
   } else {
-    /**
-       * remember to push null
-       * important to be resolve in order.
-       */
+    // push null if the user did not wish to use Base64 to preserve the order
     outputPromises.push(null);
   }
 
-  /**
-   * color palette generation is set to false by default
-   * since it is little bit slower than base64 generation
-   * if users wants it, grab it!
-   */
+  // color palette generation is set to false by default
+  // since it is little bit slower than base64 generation
+  // if users wants it, grab it!
+
   if (config.palette === true) {
     outputPromises.push(lqip.palette(path));
   } else {
-    /**
-     * remember to push null
-     * important to be resolve in order.
-     */
+    // push null if the user did not wish to use palette to preserve the order
     outputPromises.push(null);
   }
-  /**
-   * final step:
-   * resolve all promises we got
-   */
+
+  // final step, resolving all the promises we got so far
   Promise.all(outputPromises)
     .then(data => {
       if (data) {
@@ -106,6 +87,7 @@ module.exports.pitch = function(content) {
           output.palette = data[1].palette;
           output.dominant = data[1].dominant;
         }
+        // the output will be sent to webpack!
         callback(null, "module.exports = " + JSON.stringify(output) + ";");
       } else {
         callback(err, null);

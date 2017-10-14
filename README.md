@@ -1,37 +1,30 @@
-<h1 align="center">
-  <img src="https://lqip-loader.firebaseapp.com/media/logo.png" width="200">
-    <br />
-    LQIP-LOADER for WEBPACK
-    <br />
-    <br />
-</h1>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/zouhir/lqip/master/_github/logo.png" width="508">
+</p>
 
-<h4 align="center">LQIP: Low Quality Images Placeholder</h4>
+<h4 align="center">lqip-loader: Low Quality Images Placeholders for webpack</h4>
+<p align="center">
+  <a align="center" href="https://lqip-loader.firebaseapp.com/">demo</a>
+</p>
 
-#### [Demo: must see first](https://lqip-loader.firebaseapp.com/)
+<br />
+<br />
+<p>
+  <img src="https://raw.githubusercontent.com/zouhir/lqip/master/_github/installation.png" width="100%">
+</p>
 
-#### Inspired By:
-- Medium web app
-- Instagram mobile app
-- Polymer shop project
+```
+npm install --save-dev lqip-loader
+```
 
-#### What's this loader best at:
-- Static assets
-- Fast JPEG, JPG, PNG scale down and base64 string conversion.
-- Not losing a reference of the original image as the return value is an object (look on usage).
+<br />
+<p>
+  <img src="https://raw.githubusercontent.com/zouhir/lqip/master/_github/example.png" width="100%" />
+</p>
 
-#### What can be improved
+Generating Base64 & dominant colours palette for an jpeg image imported in your JS bundle:
 
-Image *src* hold a reference for the file path in your output directory, it does not emit the file, but at the moment it lacks the smartness and capability of *file-loader* to maintain relative paths.
-
-I am Currently working on a solution to pipe it after *file-loader* or *url-loader* or find a better src URL implemenation please feel free to submit a PR or raise an issue with your idea.
-
-#### Example usage
-
-**Loading JPEG or JPG files**
-
-in your *webpack config file*
-
+webpack.config.js:
 ```js
 {
     test: /\.jpe?g$/,
@@ -40,21 +33,47 @@ in your *webpack config file*
             loader: 'lqip-loader',
             options: {
                 path: '/media', // your image going to be in media folder in the output dir
-                name: '[name].[ext]' // you can use [hash].[ext] too if you wish
+                name: '[name].[ext]' // you can use [hash].[ext] too if you wish,
+                base64: true, // you'll get base64 encoded image
+                palette: false // you won't get colour palette
             }
         },
     ]
 }
 ```
-
-**In your module**
-
+your-app-module.js:
 ```js
 import banner from './images/banner.jpg';
 
-console.log(banner.preSrc) // that's the base64 blurry file, use first
-console.log(banner.src) // that's the original image URL to load later
+console.log(banner.preSrc) // "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhY....
+// the object will have palette property, array will be sorted from most dominant colour to least
+console.log(banner.palette) // [ '#628792', '#bed4d5', '#5d4340', '#ba454d', '#c5dce4', '#551f24' ] 
+console.log(banner.src) // that's the original image URL to load later!
 ```
 
-#### License
-MIT - Zouhir Chahoud
+<br />
+<p>
+  <img src="https://raw.githubusercontent.com/zouhir/lqip/master/_github/inspo.png" width="100%" />
+</p>
+
+- [Medium web app](https://medium.com/cucumbertown-magazine/the-beginners-guide-to-composition-in-food-photography-how-to-transform-your-food-photos-from-good-39613ab78bf2)
+- [Instagram native mobile app](https://www.instagram.com/)
+- [Polymer shop project](https://shop.polymer-project.org/)
+
+<br />
+<p>
+  <img src="https://github.com/zouhir/lqip/blob/master/_github/mentions.png" width="100%" />
+</p>
+
+- Essential Image Optimization, An eBook by Addy Osmany [link](https://images.guide/)
+
+<br />
+<p>
+  <img src="https://raw.githubusercontent.com/zouhir/lqip/master/_github/creds.png" width="100%" />
+</p>
+
+Related projects to this would be [lqip-loader for webpack](https://github.com/zouhir/lqip-loader) as well as [lqip-cli](https://github.com/zouhir/lqip-cli).
+
+Thanks to [Colin van Eengine](https://twitter.com/cvaneenige) for his reviewing and early testing.
+
+MIT - [Zouhir Chahoud](https://zouhir.org/)
