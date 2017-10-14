@@ -22,7 +22,7 @@ npm install --save-dev lqip-loader
   <img src="https://raw.githubusercontent.com/zouhir/lqip/master/_github/example.png" width="100%" />
 </p>
 
-Generating Base64 & dominant colours palette for an jpeg image imported in your JS bundle:
+Generating Base64 & dominant colours palette for a jpeg image imported in your JS bundle:
 
 webpack.config.js:
 ```js
@@ -48,7 +48,7 @@ import banner from './images/banner.jpg';
 console.log(banner.preSrc);
 // outputs: "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhY.... 
 
-// the object will have palette property, array will be sorted from most dominant colour to least
+// the object will have palette property, array will be sorted from most dominant colour to the least
 console.log(banner.palette) // [ '#628792', '#bed4d5', '#5d4340', '#ba454d', '#c5dce4', '#551f24' ]
  
 console.log(banner.src) // that's the original image URL to load later!
@@ -60,8 +60,8 @@ console.log(banner.src) // that's the original image URL to load later!
   <img src="https://github.com/zouhir/lqip/blob/master/_github/important.png" width="100%" />
 </p>
 
-To save memory and improve GPU performance browsers (including Chrome started from 61.0.3163.38) will now  render a 
-slightly more crisp or pixelated Base64 images.
+To save memory and improve GPU performance, browsers (including Chrome started from 61.0.3163.38) will now render a 
+slightly more crisp or pixelated Base64 encoded images.
 <p align="center">
   <img src="https://user-images.githubusercontent.com/5052316/31105257-7986782c-a82e-11e7-972b-cabcf97f13c0.png" width="500px" />
   <br />
