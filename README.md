@@ -56,6 +56,30 @@ console.log(banner.src) // that's the original image URL to load later!
 
 <br />
 <p>
+  <img src="https://github.com/zouhir/lqip/blob/master/_github/important.png" width="100%" />
+</p>
+
+To save memory and improve GPU performance browsers (including Chrome started from 61.0.3163.38) will now  render a 
+slightly more crisp or pixelated Base64 images.
+<p>
+  <img src="https://user-images.githubusercontent.com/5052316/31105257-7986782c-a82e-11e7-972b-cabcf97f13c0.png" width="500px" />
+  <br />
+  Older Chrome to the left, Chrome v61 to the right.
+</p>
+
+If you want the blur to be smooth really bad, here's a fix! 
+```css
+  img {
+    filter: blur(25px);
+  }
+```
+
+More history about the issue can be [found here](https://bugs.chromium.org/p/chromium/issues/detail?id=771110#c3) and [here](https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/6L_3ZZeuA0M).
+
+alternatively, you can fill the container with really cheap colour or gradient from the amazing palette we provide.
+
+<br />
+<p>
   <img src="https://raw.githubusercontent.com/zouhir/lqip/master/_github/inspo.png" width="100%" />
 </p>
 
@@ -73,10 +97,10 @@ console.log(banner.src) // that's the original image URL to load later!
 <br />
 <p>
   <img src="https://raw.githubusercontent.com/zouhir/lqip/master/_github/creds.png" width="100%" />
-</p>
+</p> 
 
 Related projects to this would be [lqip-loader for webpack](https://github.com/zouhir/lqip-loader) as well as [lqip-cli](https://github.com/zouhir/lqip-cli).
 
-Thanks to [Colin van Eengine](https://twitter.com/cvaneenige) for his reviewing and early testing.
+Thanks to [Colin van Eengie](https://twitter.com/cvaneenige) for his reviewing and early testing.
 
 MIT - [Zouhir Chahoud](https://zouhir.org/)

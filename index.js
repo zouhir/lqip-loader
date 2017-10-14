@@ -84,8 +84,7 @@ module.exports.pitch = function(content) {
         }
         // either null or palette
         if (data[1]) {
-          output.palette = data[1].palette;
-          output.dominant = data[1].dominant;
+          output.palette = data[1];
         }
         // the output will be sent to webpack!
         callback(null, "module.exports = " + JSON.stringify(output) + ";");
