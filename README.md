@@ -2,7 +2,7 @@
   <img src="https://raw.githubusercontent.com/zouhir/lqip/master/_github/logo.png" width="508">
 </p>
 
-<h4 align="center">lqip-loader: Low Quality Images Placeholders for webpack</h4>
+<h4 align="center">lqip-loader: low quality images placeholders for webpack</h4>
 <p align="center">
   <a align="center" href="https://lqip-loader.firebaseapp.com/">demo</a>
 </p>
@@ -34,8 +34,8 @@ webpack.config.js:
             options: {
                 path: '/media', // your image going to be in media folder in the output dir
                 name: '[name].[ext]' // you can use [hash].[ext] too if you wish,
-                base64: true, // you'll get base64 encoded image
-                palette: false // you won't get colour palette
+                base64: true, // default: true, gives the base64 encoded image
+                palette: true // default: false, gives the dominant colours palette
             }
         },
     ]
@@ -46,9 +46,12 @@ your-app-module.js:
 import banner from './images/banner.jpg';
 
 console.log(banner.preSrc) // "data:image/jpeg;base64,/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhY....
+
 // the object will have palette property, array will be sorted from most dominant colour to least
-console.log(banner.palette) // [ '#628792', '#bed4d5', '#5d4340', '#ba454d', '#c5dce4', '#551f24' ] 
+console.log(banner.palette) // [ '#628792', '#bed4d5', '#5d4340', '#ba454d', '#c5dce4', '#551f24' ]
+ 
 console.log(banner.src) // that's the original image URL to load later!
+
 ```
 
 <br />
