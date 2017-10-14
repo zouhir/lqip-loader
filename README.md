@@ -5,7 +5,10 @@
 <h4 align="center">lqip-loader: low quality images placeholders for webpack</h4>
 <p align="center">
   <a align="center" href="https://lqip-loader.firebaseapp.com/">demo</a>
+  <img src="https://raw.githubusercontent.com/zouhir/lqip-loader/master/_github/bee.jpg" width="100%">
 </p>
+
+
 
 <br />
 <br />
