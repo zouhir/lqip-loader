@@ -93,7 +93,7 @@ alternatively, you can fill the container with really cheap colour or gradient f
   <img src="https://github.com/zouhir/lqip/blob/master/_github/mentions.png" width="100%" />
 </p>
 
-- Essential Image Optimization, An eBook by Addy Osmany [link](https://images.guide/)
+- Essential Image Optimization, An [eBook by Addy Osmany](https://images.guide/)
 
 <br />
 <p>
