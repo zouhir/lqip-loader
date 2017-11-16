@@ -33,5 +33,8 @@
   },
   "devDependencies": {
     "lqip": "^2.0.2"
+  },
+  "peerDependencies": {
+    "file-loader": "*"
   }
 }
