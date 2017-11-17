@@ -2,59 +2,40 @@ var loaderUtils = require("loader-utils");
 // lqip: https://github.com/zouhir/lqip
 var lqip = require("lqip");
 
-module.exports = function() {};
-
-// @TODO: investigate pitching loader alternatives
-// recommended to work in sequence with file-loader or url-loader
-
-module.exports.pitch = function(content) {
+module.exports = function(contentBuffer) {
   this.cacheable && this.cacheable();
   var callback = this.async();
 
+  var content = contentBuffer.toString("utf8");
   // image file path
   var path = this.resourcePath;
-  // image file extension
-  var extension = path
-    .split(".")
-    .pop()
-    .toLowerCase();
 
   // user options
-  var baseConfig = loaderUtils.getOptions(this) || {};
+  var config = loaderUtils.getOptions(this) || {};
 
-  // lqip-loader default options
-  var config = {
-    path: "",
-    name: "[name].[ext]",
-    base64: true, // default that users want base64
-    palette: false // set to false for speed purposes
-  };
+  config.base64 = "base64" in config ? config.base64 : true;
+  config.palette = "palette" in config ? config.palette : false;
 
-  // take the user's specified options as a preference
-  Object.keys(config).forEach(function(key) {
-    config[key] = baseConfig[key] || config[key];
-  });
+  var contentIsUrlExport = /^module.exports = "data:(.*)base64,(.*)/.test(
+    content
+  );
+  var contentIsFileExport = /^module.exports = (.*)/.test(content);
+  var source = "";
 
-  // loader context
-  var context = config.context || this.options.context;
-
-  // use loaderUtils to construct a proper name
-  // config.name eg. ([name].[ext]: car.jpg) or ([hash].[ext]: [96redfghjk.....].[jpg])
-  source =
-    loaderUtils.interpolateName(this, config.path + "/" + config.name, {
-      context: context,
-      content: content
-    }) || "/";
+  if (contentIsUrlExport) {
+    source = content.match(/^module.exports = (.*)/)[1];
+  } else {
+    if (!contentIsFileExport) {
+      var fileLoader = require("file-loader");
+      content = fileLoader.call(this, contentBuffer);
+    }
+    source = content.match(/^module.exports = (.*);/)[1];
+  }
 
   // promise array in case users want both
   // base64 & color palettes generated
   // that means we have 2 promises to resolve
   var outputPromises = [];
-
-  // output object
-  var output = {};
-
-  output.src = source; // original image source
 
   if (config.base64 === true) {
     outputPromises.push(lqip.base64(path));
@@ -78,16 +59,18 @@ module.exports.pitch = function(content) {
   Promise.all(outputPromises)
     .then(data => {
       if (data) {
+        var result = 'module.exports = { "src": ' + source;
         // either null or base64
         if (data[0]) {
-          output.preSrc = data[0];
+          result += ', "preSrc": ' + JSON.stringify(data[0]);
         }
         // either null or palette
         if (data[1]) {
-          output.palette = data[1];
+          result += ', "palette": ' + JSON.stringify(data[1]);
         }
+        result += " };";
         // the output will be sent to webpack!
-        callback(null, "module.exports = " + JSON.stringify(output) + ";");
+        callback(null, result);
       } else {
         callback(err, null);
       }
@@ -97,3 +80,5 @@ module.exports.pitch = function(content) {
       callback(err, null);
     });
 };
+
+module.exports.raw = true;
