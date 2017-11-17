@@ -29,6 +29,10 @@ PS: The large image file will be emitted & only 400byte of Base64 (if set to tru
 webpack.config.js:
 ```js
 {
+    /**
+     * OPTION A:
+     * default file-loader fallback
+     **/
     test: /\.jpe?g$/,
     loaders: [
         {
@@ -41,8 +45,30 @@ webpack.config.js:
             }
         },
     ]
+
+    /**
+     * OPTION B:
+     * Chained with your own url-loader or file-loader
+     **/
+    test: /\.(png|jpe?g)$/,
+    loaders: [
+      {
+        loader: 'lqip-loader',
+        options: {
+          base64: true,
+          palette: false
+        }
+      },
+      {
+        loader: "url-loader",
+        options: {
+          limit: 8000
+        }
+      }
+  ]
 }
 ```
+
 your-app-module.js:
 ```js
 import banner from './images/banner.jpg';
