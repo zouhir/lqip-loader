@@ -128,7 +128,7 @@ alternatively, you can fill the container with a really cheap colour or gradient
   <img src="https://raw.githubusercontent.com/zouhir/lqip/master/_github/creds.png" width="100%" />
 </p> 
 
-Related projects to this would be [lqip-loader for webpack](https://github.com/zouhir/lqip-loader) as well as [lqip-cli](https://github.com/zouhir/lqip-cli).
+Related projects to this would be [lqip module for Node](https://github.com/zouhir/lqip) as well as [lqip-cli](https://github.com/zouhir/lqip-cli).
 
 Thanks to [Colin van Eenige](https://twitter.com/cvaneenige) for his reviewing and early testing.
 
