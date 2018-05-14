@@ -29,42 +29,42 @@ PS: The large image file will be emitted & only 400byte of Base64 (if set to tru
 webpack.config.js:
 ```js
 {
-    /**
-     * OPTION A:
-     * default file-loader fallback
-     **/
-    test: /\.jpe?g$/,
-    loaders: [
-        {
-            loader: 'lqip-loader',
-            options: {
-                path: '/media', // your image going to be in media folder in the output dir
-                name: '[name].[ext]', // you can use [hash].[ext] too if you wish,
-                base64: true, // default: true, gives the base64 encoded image
-                palette: true, // default: false, gives the dominant colours palette
-            }
-        },
-    ]
-
-    /**
-     * OPTION B:
-     * Chained with your own url-loader or file-loader
-     **/
-    test: /\.(png|jpe?g)$/,
-    loaders: [
-      {
-        loader: 'lqip-loader',
-        options: {
-          base64: true,
-          palette: false
-        }
-      },
-      {
-        loader: "url-loader",
-        options: {
-          limit: 8000
-        }
+  /**
+   * OPTION A:
+   * default file-loader fallback
+   **/
+  test: /\.jpe?g$/,
+  loaders: [
+    {
+      loader: 'lqip-loader',
+      options: {
+        path: '/media', // your image going to be in media folder in the output dir
+        name: '[name].[ext]', // you can use [hash].[ext] too if you wish,
+        base64: true, // default: true, gives the base64 encoded image
+        palette: true // default: false, gives the dominant colours palette
       }
+    }
+  ]
+
+  /**
+   * OPTION B:
+   * Chained with your own url-loader or file-loader
+   **/
+  test: /\.(png|jpe?g)$/,
+  loaders: [
+    {
+      loader: 'lqip-loader',
+      options: {
+        base64: true,
+        palette: false
+      }
+    },
+    {
+      loader: 'url-loader',
+      options: {
+        limit: 8000
+      }
+    }
   ]
 }
 ```
@@ -98,9 +98,9 @@ slightly more crisp or pixelated Base64 encoded images.
 
 If you want the blur to be smooth really bad, here's a fix! 
 ```css
-  img {
-    filter: blur(25px);
-  }
+img {
+  filter: blur(25px);
+}
 ```
 
 More history about the issue can be [found here](https://bugs.chromium.org/p/chromium/issues/detail?id=771110#c3) and [here](https://groups.google.com/a/chromium.org/forum/#!topic/blink-dev/6L_3ZZeuA0M).
