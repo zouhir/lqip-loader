@@ -72,12 +72,12 @@ module.exports = function(contentBuffer) {
         // the output will be sent to webpack!
         callback(null, result);
       } else {
-        callback(err, null);
+        callback(new Error('No data received'), null);
       }
     })
     .catch(error => {
       console.error(error);
-      callback(err, null);
+      callback(error, null);
     });
 };
 
