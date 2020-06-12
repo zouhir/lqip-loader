@@ -77,7 +77,7 @@ module.exports = function(contentBuffer) {
     })
     .catch(error => {
       console.error(error);
-      callback(err, null);
+      callback(error, null);
     });
 };
 
