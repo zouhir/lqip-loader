@@ -78,12 +78,12 @@ module.exports = function (contentBuffer) {
         // the output will be sent to webpack!
         callback(null, result);
       } else {
-        callback(err, null);
+        callback(new Error("[lqip-loader] No data received from base64/palette promise"), null);
       }
     })
     .catch(error => {
       console.error(error);
-      callback(err, null);
+      callback(error, null);
     });
 };
 
