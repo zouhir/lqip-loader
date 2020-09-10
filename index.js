@@ -2,7 +2,7 @@ var loaderUtils = require("loader-utils");
 // lqip: https://github.com/zouhir/lqip
 var lqip = require("lqip");
 
-module.exports = function(contentBuffer) {
+module.exports = function (contentBuffer) {
   this.cacheable && this.cacheable();
   var callback = this.async();
 
@@ -16,22 +16,26 @@ module.exports = function(contentBuffer) {
   config.base64 = "base64" in config ? config.base64 : true;
   config.palette = "palette" in config ? config.palette : false;
 
-  var contentIsUrlExport = /^(module.exports =|export default) "data:(.*)base64,(.*)/.test(
-    content
-  );
-  var contentIsFileExport = /^(module.exports =|export default) (.*)/.test(
-    content
-  );
+  var contentIsUrlExport = /^(module.exports =|export default) "data:(.*)base64,(.*)/.test(content);
+  var contentIsFileExport = /^(module.exports =|export default) (.*)/.test(content);
   var source = "";
 
   if (contentIsUrlExport) {
-    source = content.match(/^(module.exports =|export default) (.*)/)[2];
+    var urlMatch = content.match(/^(module.exports =|export default) (.*)/);
+    if (!(urlMatch && urlMatch[2])) {
+      throw new Error("[lqip-loader] Unable to process file (url).");
+    }
+    source = urlMatch[2];
   } else {
     if (!contentIsFileExport) {
       var fileLoader = require("file-loader");
       content = fileLoader.call(this, contentBuffer);
     }
-    source = content.match(/^(module.exports =|export default) (.*);/)[2];
+    var fileMatch = content.match(/^(module.exports =|export default) (.*);/);
+    if (!(fileMatch && fileMatch[2])) {
+      throw new Error("[lqip-loader] Unable to process file (export).");
+    }
+    source = fileMatch[2];
   }
 
   // promise array in case users want both
