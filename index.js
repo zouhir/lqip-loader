@@ -16,20 +16,22 @@ module.exports = function(contentBuffer) {
   config.base64 = "base64" in config ? config.base64 : true;
   config.palette = "palette" in config ? config.palette : false;
 
-  var contentIsUrlExport = /^module.exports = "data:(.*)base64,(.*)/.test(
+  var contentIsUrlExport = /^(module.exports =|export default) "data:(.*)base64,(.*)/.test(
     content
   );
-  var contentIsFileExport = /^module.exports = (.*)/.test(content);
+  var contentIsFileExport = /^(module.exports =|export default) (.*)/.test(
+    content
+  );
   var source = "";
 
   if (contentIsUrlExport) {
-    source = content.match(/^module.exports = (.*)/)[1];
+    source = content.match(/^(module.exports =|export default) (.*)/)[2];
   } else {
     if (!contentIsFileExport) {
       var fileLoader = require("file-loader");
       content = fileLoader.call(this, contentBuffer);
     }
-    source = content.match(/^module.exports = (.*);/)[1];
+    source = content.match(/^(module.exports =|export default) (.*);/)[2];
   }
 
   // promise array in case users want both
