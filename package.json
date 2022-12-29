@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/zouhir/lqip-loader#readme",
   "dependencies": {
-    "loader-utils": "^1.1.0",
+    "loader-utils": "^3.2.1",
     "lqip": "^2.1.0"
   },
   "peerDependencies": {
